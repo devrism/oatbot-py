@@ -1,6 +1,9 @@
+# oatbot created by devrism, exclusively for the friend chat junk land mark II Discord server
+# link to invite: 
+# https://discordapp.com/oauth2/authorize?client_id=316389024191479809&scope=bot&permissions=0
+
 import discord
 import asyncio
-#link to invite: https://discordapp.com/oauth2/authorize?client_id=316389024191479809&scope=bot&permissions=0
 
 client = discord.Client()
 
@@ -12,7 +15,6 @@ async def on_ready():
     print(client.user.id)
     print('------')
     """
-
 @client.event
 async def on_message(message):
     lower_msg = message.content.lower() #we want to be able to use commands regardless of case
