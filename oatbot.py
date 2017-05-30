@@ -30,7 +30,10 @@ async def on_message(message):
         await client.send_message(message.channel, 'Done sleeping')
     """
 
-    if lower_msg.startswith('/oat'):
+    if '/oat' in lower_msg:
         await client.add_reaction(message, 'name:304863358325358602')
+
+    if '(╯°□°）╯︵ ┻━┻' in lower_msg:
+        await client.send_message(message.channel, '┬──┬ ノ( ゜-゜ノ);;')
 
 client.run('MzE2Mzg5MDI0MTkxNDc5ODA5.DAUong.ZXvbBbeGyjR_QWxFNNFilZqafYM')
