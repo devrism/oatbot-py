@@ -9,12 +9,11 @@ client = discord.Client()
 
 @client.event
 async def on_ready():
-    """
     print('Logged in as')
     print(client.user.name)
     print(client.user.id)
     print('------')
-    """
+    
 @client.event
 async def on_message(message):
     lower_msg = message.content.lower() #we want to be able to use commands regardless of case
@@ -32,9 +31,11 @@ async def on_message(message):
         await client.send_message(message.channel, 'Done sleeping')
     """
 
+    #responds to oats with bandaid emoji
     if '/oat' in lower_msg:
         await client.add_reaction(message, 'name:304863358325358602')
 
+    #put that table back where it came from, or so help me
     if '(╯°□°）╯︵ ┻━┻' in lower_msg:
         await client.send_message(message.channel, '┬──┬ ノ( ゜-゜ノ);;')
 
