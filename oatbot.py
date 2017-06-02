@@ -1,22 +1,29 @@
-# oatbot created by devrism, exclusively for the friend chat junk land mark II Discord server
-# link to invite: 
-# https://discordapp.com/oauth2/authorize?client_id=316389024191479809&scope=bot&permissions=0
+# pylint: disable=invalid-name
+
+"""
+oatbot created by devrism, exclusively for the friend chat junk land mark II Discord server
+link to invite:
+https://discordapp.com/oauth2/authorize?client_id=316389024191479809&scope=bot&permissions=0
+"""
 
 import discord
-import asyncio
+#import asyncio
+from commandparser import parseCommand
 
 client = discord.Client()
 
+prefix = 'oat/' #TODO: add function to change prefix later
+
 @client.event
 async def on_ready():
+    """logging stuff, can delete later"""
     print('Logged in as')
     print(client.user.name)
     print(client.user.id)
     print('------')
-    
+
 @client.event
 async def on_message(message):
-    lower_msg = message.content.lower() #we want to be able to use commands regardless of case
     """
     if message.content.startswith('!test'):
         counter = 0
@@ -30,6 +37,7 @@ async def on_message(message):
         await asyncio.sleep(5)
         await client.send_message(message.channel, 'Done sleeping')
     """
+    lower_msg = message.content.lower() #we want to be able to use commands regardless of case
 
     #responds to oats with bandaid emoji
     if '/oat' in lower_msg:
@@ -38,5 +46,8 @@ async def on_message(message):
     #put that table back where it came from, or so help me
     if '(╯°□°）╯︵ ┻━┻' in lower_msg:
         await client.send_message(message.channel, '┬──┬ ノ( ゜-゜ノ);;')
+
+    if message.content.startswith(prefix):
+        await client.send_message(message.channel, parseCommand())
 
 client.run('MzE2Mzg5MDI0MTkxNDc5ODA5.DAUong.ZXvbBbeGyjR_QWxFNNFilZqafYM')
