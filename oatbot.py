@@ -5,14 +5,16 @@ oatbot created by devrism, exclusively for the friend chat junk land mark II Dis
 link to invite:
 https://discordapp.com/oauth2/authorize?client_id=316389024191479809&scope=bot&permissions=0
 """
-
-import discord
 #import asyncio
+import discord
 from commandparser import parseCommand
 
 client = discord.Client()
 
-prefix = 'oat/' #TODO: add function to change prefix later
+PREFIX = 'oat' #TODO: add function to change prefix later
+separator = '/'
+playing = 'with oats' #name of the game the bot plays
+
 
 @client.event
 async def on_ready():
@@ -21,6 +23,12 @@ async def on_ready():
     print(client.user.name)
     print(client.user.id)
     print('------')
+    await client.change_presence(game=discord.Game(name=playing))
+
+@client.event
+async def on_resumed():
+    """trying to change game status"""
+    await client.change_presence(game=discord.Game(name=playing))
 
 @client.event
 async def on_message(message):
@@ -47,7 +55,8 @@ async def on_message(message):
     if '(╯°□°）╯︵ ┻━┻' in lower_msg:
         await client.send_message(message.channel, '┬──┬ ノ( ゜-゜ノ);;')
 
-    if message.content.startswith(prefix):
-        await client.send_message(message.channel, parseCommand())
+    #if the message starts with our designated prefix, process the command
+    if message.content.startswith(PREFIX+separator):
+        await client.send_message(message.channel, parseCommand(message, separator, PREFIX))
 
 client.run('MzE2Mzg5MDI0MTkxNDc5ODA5.DAUong.ZXvbBbeGyjR_QWxFNNFilZqafYM')
