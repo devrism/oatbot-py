@@ -13,8 +13,7 @@ client = discord.Client()
 
 PREFIX = 'oat' #TODO: add function to change prefix later
 separator = '/'
-playing = 'with oats' #name of the game the bot plays
-
+playing = 'with oats | \'oat/help\'' #name of the game the bot plays
 
 @client.event
 async def on_ready():
