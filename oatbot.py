@@ -2,8 +2,6 @@
 
 """
 oatbot created by devrism, exclusively for the friend chat junk land mark II Discord server
-link to invite:
-https://discordapp.com/oauth2/authorize?client_id=316389024191479809&scope=bot&permissions=0
 """
 #import asyncio
 import discord
