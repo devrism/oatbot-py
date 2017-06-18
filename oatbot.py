@@ -50,6 +50,10 @@ async def on_message(message):
     if '/oat' in lower_msg:
         await client.add_reaction(message, 'name:304863358325358602')
 
+    #Dr. Pimplepopper is gross af
+    if 'pimplepopper' in lower_msg:
+        await client.add_reaction(message, '\U0001F922')
+
     #put that table back where it came from, or so help me
     if '(╯°□°）╯︵ ┻━┻' in lower_msg:
         await client.send_message(message.channel, '┬──┬ ノ( ゜-゜ノ);;')
