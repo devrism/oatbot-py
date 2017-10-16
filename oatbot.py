@@ -27,7 +27,7 @@ async def on_resumed():
     """trying to change game status"""
     await client.change_presence(game=discord.Game(name=playing))
 
-@client.event
+@client.event 
 async def on_message(message):
     """
     if message.content.startswith('!test'):
