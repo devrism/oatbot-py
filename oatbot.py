@@ -6,6 +6,7 @@ oatbot created by devrism, exclusively for the friend chat junk land mark II Dis
 #import asyncio
 import discord
 from commandparser import parseCommand
+from config import key
 
 client = discord.Client()
 
@@ -60,4 +61,4 @@ async def on_message(message):
     if message.content.startswith(PREFIX+separator):
         await client.send_message(message.channel, parseCommand(message, separator, PREFIX))
 
-client.run('MzE2Mzg5MDI0MTkxNDc5ODA5.DAUong.ZXvbBbeGyjR_QWxFNNFilZqafYM')
+client.run(key)
