@@ -7,12 +7,13 @@ oatbot created by devrism, exclusively for the friend chat junk land mark II Dis
 import discord
 from commandparser import parseCommand
 from config import key
+from thonkify import thonkify
 
 client = discord.Client()
 
 PREFIX = 'oat' #TODO: add function to change prefix later
 separator = '/'
-playing = 'thonkify | 14% done' #name of the game the bot plays
+playing = 'thonkify | 50% done' #name of the game the bot plays
 
 @client.event
 async def on_ready():
@@ -25,7 +26,7 @@ async def on_ready():
 
 @client.event
 async def on_resumed():
-    """trying to change game status"""
+    # change game status
     await client.change_presence(game=discord.Game(name=playing))
 
 @client.event
@@ -48,6 +49,14 @@ async def on_message(message):
     #responds to oats with bandaid emoji
     if '/oat' in lower_msg:
         await client.add_reaction(message, 'name:304863358325358602')
+
+    #thonkify 
+    if '/thonkify' in lower_msg:
+        if len(message.content) > 60:
+            await client.send_message(message.channel, 'Error: message cannot be over 60 characters')
+        else:
+            thonkify(message)
+            await client.send_file(message.channel, 'result.png')
 
     #Dr. Pimplepopper is gross af
     if 'pimplepopper' in lower_msg:
