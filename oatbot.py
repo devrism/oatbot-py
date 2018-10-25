@@ -3,17 +3,22 @@
 """
 oatbot created by devrism, exclusively for the friend chat junk land mark II Discord server
 """
-#import asyncio
+
 import discord
 from commandparser import parseCommand
-from config import key
+from config import *
 from thonkify import thonkify
+import Cleverbotio
 
 client = discord.Client()
 
 PREFIX = 'oat' #TODO: add function to change prefix later
 separator = '/'
 playing = 'thonkify | 50% done' #name of the game the bot plays
+
+#cleverbot
+chatbot = Cleverbotio.Cleverbot(cleverbotUser, cleverbotKey, nick = 'oatbot')
+chatbot.create_session()
 
 @client.event
 async def on_ready():
@@ -51,7 +56,7 @@ async def on_message(message):
         await client.add_reaction(message, 'name:304863358325358602')
 
     #thonkify 
-    if '/thonkify' in lower_msg:
+    elif '/thonkify' in lower_msg:
         if len(message.content) > 60:
             await client.send_message(message.channel, 'Error: message cannot be over 60 characters')
         else:
@@ -59,15 +64,30 @@ async def on_message(message):
             await client.send_file(message.channel, 'result.png')
 
     #Dr. Pimplepopper is gross af
-    if 'pimplepopper' in lower_msg:
+    elif 'pimplepopper' in lower_msg:
         await client.add_reaction(message, '\U0001F922')
 
     #put that table back where it came from, or so help me
-    if '(╯°□°）╯︵ ┻━┻' in lower_msg:
+    elif '(╯°□°）╯︵ ┻━┻' in lower_msg:
         await client.send_message(message.channel, '┬──┬ ノ( ゜-゜ノ);;')
+
+    elif 'yeet' in lower_msg:
+        await client.send_message(message.channel, 'yeet!')
+
+    #cleverbot
+    """
+    elif oatbotId in lower_msg or oatbotIdNick in lower_msg:
+        lower_msg = lower_msg[22:]
+        chatbotReply = chatbot.say(lower_msg)
+        await client.send_message(message.channel, chatbotReply['response'].strip('\"'))
+    """
 
     #if the message starts with our designated prefix, process the command
     if message.content.startswith(PREFIX+separator):
         await client.send_message(message.channel, parseCommand(message, separator, PREFIX))
+
+async def keepawake():
+    channels = client.get_all_channels()
+    asyncio.sleep(50)
 
 client.run(key)
