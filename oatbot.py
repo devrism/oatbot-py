@@ -8,17 +8,17 @@ import discord
 from commandparser import parseCommand
 from config import *
 from thonkify import thonkify
-import Cleverbotio
+#import Cleverbotio
 
 client = discord.Client()
 
 PREFIX = 'oat' #TODO: add function to change prefix later
 separator = '/'
-playing = 'thonkify | 50% done' #name of the game the bot plays
+playing = 'yeet' #name of the game the bot plays
 
 #cleverbot
-chatbot = Cleverbotio.Cleverbot(cleverbotUser, cleverbotKey, nick = 'oatbot')
-chatbot.create_session()
+#chatbot = Cleverbotio.Cleverbot(cleverbotUser, cleverbotKey, nick = 'oatbot')
+#chatbot.create_session()
 
 @client.event
 async def on_ready():
@@ -51,40 +51,41 @@ async def on_message(message):
     """
     lower_msg = message.content.lower() #we want to be able to use commands regardless of case
 
-    #responds to oats with bandaid emoji
-    if '/oat' in lower_msg:
-        await client.add_reaction(message, 'name:304863358325358602')
+    if message.author.bot is False:
+        #responds to oats with bandaid emoji
+        if '/oat' in lower_msg:
+            await client.add_reaction(message, 'name:304863358325358602')
 
-    #thonkify 
-    elif '/thonkify' in lower_msg:
-        if len(message.content) > 60:
-            await client.send_message(message.channel, 'Error: message cannot be over 60 characters')
-        else:
-            thonkify(message)
-            await client.send_file(message.channel, 'result.png')
+        #thonkify 
+        elif '/thonkify' in lower_msg:
+            if len(message.content) > 60:
+                await client.send_message(message.channel, 'Error: message cannot be over 60 characters')
+            else:
+                thonkify(message)
+                await client.send_file(message.channel, 'result.png')
 
-    #Dr. Pimplepopper is gross af
-    elif 'pimplepopper' in lower_msg:
-        await client.add_reaction(message, '\U0001F922')
+        #Dr. Pimplepopper is gross af
+        elif 'pimplepopper' in lower_msg:
+            await client.add_reaction(message, '\U0001F922')
 
-    #put that table back where it came from, or so help me
-    elif '(╯°□°）╯︵ ┻━┻' in lower_msg:
-        await client.send_message(message.channel, '┬──┬ ノ( ゜-゜ノ);;')
+        #put that table back where it came from, or so help me
+        elif '(╯°□°）╯︵ ┻━┻' in lower_msg:
+            await client.send_message(message.channel, '┬──┬ ノ( ゜-゜ノ);;')
 
-    elif 'yeet' in lower_msg:
-        await client.send_message(message.channel, 'yeet!')
+        elif 'yeet' in lower_msg:
+            await client.send_message(message.channel, 'yeet!')
 
-    #cleverbot
-    """
-    elif oatbotId in lower_msg or oatbotIdNick in lower_msg:
-        lower_msg = lower_msg[22:]
-        chatbotReply = chatbot.say(lower_msg)
-        await client.send_message(message.channel, chatbotReply['response'].strip('\"'))
-    """
+        #cleverbot
+        """
+        elif oatbotId in lower_msg or oatbotIdNick in lower_msg:
+            lower_msg = lower_msg[22:]
+            chatbotReply = chatbot.say(lower_msg)
+            await client.send_message(message.channel, chatbotReply['response'].strip('\"'))
+        """
 
-    #if the message starts with our designated prefix, process the command
-    if message.content.startswith(PREFIX+separator):
-        await client.send_message(message.channel, parseCommand(message, separator, PREFIX))
+        #if the message starts with our designated prefix, process the command
+        if message.content.startswith(PREFIX+separator):
+            await client.send_message(message.channel, parseCommand(message, separator, PREFIX))
 
 async def keepawake():
     channels = client.get_all_channels()
