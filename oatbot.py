@@ -5,12 +5,8 @@ oatbot created by devrism, exclusively for the friend chat junk land mark II Dis
 """
 
 import discord
-#from config import *
-from configtest import *
+from config import *
 from thonkify import thonkify
-import spotipy
-import spotipy.util as util
-import re
 
 client = discord.Client()
 
@@ -39,8 +35,8 @@ async def on_message(message):
     if message.author.bot is False:
         #responds to oats with bandaid emoji
         if '/oat' in lower_msg:
-            #await client.add_reaction(message, 'name:304863358325358602')
-            await client.add_reaction(message, 'name:457245675072258078')
+            await client.add_reaction(message, 'name:304863358325358602')
+            # await client.add_reaction(message, 'name:457245675072258078')
 
         #bacAgreed
         if 'naruhodo' in lower_msg:
