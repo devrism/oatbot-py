@@ -5,20 +5,14 @@ oatbot created by devrism, exclusively for the friend chat junk land mark II Dis
 """
 
 import discord
-from commandparser import parseCommand
 from config import *
 from thonkify import thonkify
-#import Cleverbotio
 
 client = discord.Client()
 
 PREFIX = 'oat' #TODO: add function to change prefix later
 separator = '/'
-playing = 'yeet' #name of the game the bot plays
-
-#cleverbot
-#chatbot = Cleverbotio.Cleverbot(cleverbotUser, cleverbotKey, nick = 'oatbot')
-#chatbot.create_session()
+playing = 'naruhodo' #name of the game the bot plays
 
 @client.event
 async def on_ready():
@@ -36,28 +30,21 @@ async def on_resumed():
 
 @client.event
 async def on_message(message):
-    """
-    if message.content.startswith('!test'):
-        counter = 0
-        tmp = await client.send_message(message.channel, 'Calculating messages...')
-        async for log in client.logs_from(message.channel, limit=100):
-            if log.author == message.author:
-                counter += 1
-
-        await client.edit_message(tmp, 'You have {} messages.'.format(counter))
-    elif message.content.startswith('!sleep'):
-        await asyncio.sleep(5)
-        await client.send_message(message.channel, 'Done sleeping')
-    """
     lower_msg = message.content.lower() #we want to be able to use commands regardless of case
 
     if message.author.bot is False:
         #responds to oats with bandaid emoji
         if '/oat' in lower_msg:
             await client.add_reaction(message, 'name:304863358325358602')
+            # await client.add_reaction(message, 'name:457245675072258078')
 
+        #bacAgreed
+        if 'naruhodo' in lower_msg:
+            emoji = discord.utils.get(client.get_all_emojis(), id='555426896805101586')
+            await client.add_reaction(message, emoji)
+            
         #thonkify 
-        elif '/thonkify' in lower_msg:
+        elif '/thonkify ' in lower_msg:
             if len(message.content) > 60:
                 await client.send_message(message.channel, 'Error: message cannot be over 60 characters')
             else:
@@ -72,23 +59,16 @@ async def on_message(message):
         elif '(╯°□°）╯︵ ┻━┻' in lower_msg:
             await client.send_message(message.channel, '┬──┬ ノ( ゜-゜ノ);;')
 
+        #music channel - add all youtube links to spotify playlist
+        elif '/spotifyadd ' in lower_msg: #bots channel 
+            youtubeLink = lower_msg[12:]
+            await client.send_message(message.channel, youtubeLink)
+
         elif 'yeet' in lower_msg:
             await client.send_message(message.channel, 'yeet!')
 
-        #cleverbot
-        """
-        elif oatbotId in lower_msg or oatbotIdNick in lower_msg:
-            lower_msg = lower_msg[22:]
-            chatbotReply = chatbot.say(lower_msg)
-            await client.send_message(message.channel, chatbotReply['response'].strip('\"'))
-        """
-
         #if the message starts with our designated prefix, process the command
-        if message.content.startswith(PREFIX+separator):
-            await client.send_message(message.channel, parseCommand(message, separator, PREFIX))
-
-async def keepawake():
-    channels = client.get_all_channels()
-    asyncio.sleep(50)
+        #if message.content.startswith(PREFIX+separator):
+        #    await client.send_message(message.channel, parseCommand(message, separator, PREFIX))
 
 client.run(key)
