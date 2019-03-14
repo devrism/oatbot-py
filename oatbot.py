@@ -40,11 +40,8 @@ async def on_message(message):
 
         #bacAgreed
         if 'naruhodo' in lower_msg:
-            emojiList = client.get_all_emojis()
-            for emoji in emojiList:
-                if emoji.id == '555426896805101586':
-                    await client.add_reaction(message, emoji)
-                    break
+            emoji = discord.utils.get(client.get_all_emojis(), id='555426896805101586')
+            await client.add_reaction(message, emoji)
             
         #thonkify 
         elif '/thonkify ' in lower_msg:
