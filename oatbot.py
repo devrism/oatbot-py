@@ -71,5 +71,5 @@ async def on_message(message):
         #if the message starts with our designated prefix, process the command
         #if message.content.startswith(PREFIX+separator):
         #    await client.send_message(message.channel, parseCommand(message, separator, PREFIX))
-   client.run(key) 
+client.run(key) 
     
