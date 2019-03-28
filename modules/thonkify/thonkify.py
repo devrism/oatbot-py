@@ -1,11 +1,11 @@
 from PIL import Image
-from dictionary import dictionary
+from .dictionary import dictionary
 
 def thonkify(input):
     input = input.content
     input = input[10:]
     cleaned = input
-    tracking = Image.open("images/misc/tracking.png")
+    tracking = Image.open("modules/thonkify/images/misc/tracking.png")
 
     #remove characters thonkify can't parse
     for character in input:

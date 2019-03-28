@@ -1,13 +1,14 @@
 # pylint: disable=invalid-name
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 """
 oatbot created by devrism, exclusively for the friend chat junk land mark II Discord server
 """
 
 import discord
-from config import *
-from thonkify import thonkify
+from res.configtest import *
+from modules.thonkify.thonkify import thonkify
+from modules.weather.weather import getWeather
 
 client = discord.Client()
 
@@ -34,15 +35,17 @@ async def on_message(message):
     lower_msg = message.content.lower() #we want to be able to use commands regardless of case
 
     if message.author.bot is False:
+
+        ############################################## slash commands ################################################
+        
+        if '/weather ' in lower_msg: #weather
+            reply = getWeather(message, weatherKey)
+            await client.send_message(message.channel, reply)
+
         #responds to oats with bandaid emoji
-        if '/oat' in lower_msg:
+        elif '/oat' in lower_msg:
             await client.add_reaction(message, 'name:304863358325358602')
             # await client.add_reaction(message, 'name:457245675072258078')
-
-        #bacAgreed
-        if 'naruhodo' in lower_msg:
-            emoji = discord.utils.get(client.get_all_emojis(), id='555426896805101586')
-            await client.add_reaction(message, emoji)
             
         #thonkify 
         elif '/thonkify ' in lower_msg:
@@ -52,18 +55,20 @@ async def on_message(message):
                 thonkify(message)
                 await client.send_file(message.channel, 'result.png')
 
+        ############################################## reactions #####################################################
+
+        #bacAgreed
+        if 'naruhodo' in lower_msg:
+            emoji = discord.utils.get(client.get_all_emojis(), id='555426896805101586')
+            await client.add_reaction(message, emoji)
+
         #Dr. Pimplepopper is gross af
-        elif 'pimplepopper' in lower_msg:
+        if 'pimplepopper' in lower_msg:
             await client.add_reaction(message, '\U0001F922')
 
         #put that table back where it came from, or so help me
         elif '(╯°□°）╯︵ ┻━┻' in lower_msg:
             await client.send_message(message.channel, '┬──┬ ノ( ゜-゜ノ);;')
-
-        #music channel - add all youtube links to spotify playlist
-        elif '/spotifyadd ' in lower_msg: #bots channel 
-            youtubeLink = lower_msg[12:]
-            await client.send_message(message.channel, youtubeLink)
 
         elif 'yeet' in lower_msg:
             await client.send_message(message.channel, 'yeet!')
@@ -71,5 +76,5 @@ async def on_message(message):
         #if the message starts with our designated prefix, process the command
         #if message.content.startswith(PREFIX+separator):
         #    await client.send_message(message.channel, parseCommand(message, separator, PREFIX))
-client.run(key) 
-    
+
+client.run(key)
