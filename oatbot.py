@@ -1,12 +1,12 @@
 # pylint: disable=invalid-name
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 """
 oatbot created by devrism, exclusively for the friend chat junk land mark II Discord server
 """
 
 import discord
-from res.config import *
+from res.configtest import *
 from modules.thonkify.thonkify import thonkify
 from modules.weather.weather import getWeather
 
@@ -38,12 +38,12 @@ async def on_message(message):
 
         ############################################## slash commands ################################################
         
-        elif '/weather ' in lower_msg: #weather
+        if '/weather ' in lower_msg: #weather
             reply = getWeather(message, weatherKey)
             await client.send_message(message.channel, reply)
 
         #responds to oats with bandaid emoji
-        if '/oat' in lower_msg:
+        elif '/oat' in lower_msg:
             await client.add_reaction(message, 'name:304863358325358602')
             # await client.add_reaction(message, 'name:457245675072258078')
             
@@ -63,7 +63,7 @@ async def on_message(message):
             await client.add_reaction(message, emoji)
 
         #Dr. Pimplepopper is gross af
-        elif 'pimplepopper' in lower_msg:
+        if 'pimplepopper' in lower_msg:
             await client.add_reaction(message, '\U0001F922')
 
         #put that table back where it came from, or so help me
