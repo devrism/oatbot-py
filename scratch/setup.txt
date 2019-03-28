@@ -1,0 +1,5 @@
+python3 -m pip install -U discord.py[voice]
+py -m pip install Pillow
+#py -m pip install cleverbotio
+#py -m pip install aiohttp
+nohup py oatbot.py &
