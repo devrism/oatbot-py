@@ -1,4 +1,7 @@
-config.py
+*config.py
+*.png
+scratch/*
 *.pyc
 *.out
 *.vscode
+oatbot.code-workspace

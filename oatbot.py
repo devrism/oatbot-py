@@ -14,7 +14,7 @@ client = discord.Client()
 
 PREFIX = 'oat' #TODO: add function to change prefix later
 separator = '/'
-playing = 'naruhodo' #name of the game the bot plays
+playing = 'with the weather' #name of the game the bot plays
 
 @client.event
 async def on_ready():
@@ -38,7 +38,7 @@ async def on_message(message):
 
         ############################################## slash commands ################################################
         
-        if '/weather ' in lower_msg: #weather
+        if lower_msg.startswith('/weather '): #weather
             reply = getWeather(message, weatherKey)
             await client.send_message(message.channel, reply)
 
@@ -48,7 +48,7 @@ async def on_message(message):
             # await client.add_reaction(message, 'name:457245675072258078')
             
         #thonkify 
-        elif '/thonkify ' in lower_msg:
+        elif lower_msg.startswith('/thonkify '):
             if len(message.content) > 60:
                 await client.send_message(message.channel, 'Error: message cannot be over 60 characters')
             else:

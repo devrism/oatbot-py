@@ -1,4 +1,5 @@
-import pyowm
+import os
+from apixu.client import ApixuClient
 
 def getWeather(input, weatherKey):
     #TODO documentation
@@ -7,23 +8,19 @@ def getWeather(input, weatherKey):
 
     input = input.content
     input = input[9:]
-    
-    owm = pyowm.OWM(weatherKey)
-    reply = ""
 
     try:
-        observationList = owm.weather_at_places(input, searchtype='like')
+        weatherClient = ApixuClient(weatherKey)
 
-        #for obs in observationList:
-            #reply = reply + obs.get_location().get_name() + ", " +  obs.get_location().get_country() + "\n"
-            #print([func for func in dir(obs.get_location()) if callable(getattr(obs.get_location(), func))])
-        if observationList:
-            reply = "My weather module is under construction! But here's my best try: \n\n" + str(observationList[0].get_weather())
-        else:
-            reply = "I couldn't find your location, but I'm working hard to improve! 🙇"
+        search = weatherClient.search(q=input)
 
-    except Exception as e:
-        print(e)
-        reply = "Error, please try again later 🙇 maybe try using your zip code instead?"
+        forecast = weatherClient.forecast(q=input, days=2)
+
+        reply = str(forecast['location']['name']) + " - currently " + str(forecast['current']['temp_f']) + "°F/"+ str(forecast['current']['temp_c']) + "°C and " + str(forecast['current']['condition']['text']) 
+        for day in forecast['forecast']['forecastday']:
+            reply += "\n\nForecast Date: " + str(day['date']) + ": " + str(day['day']['condition']['text'])
+            reply += "\nAverage Temperature forecast: " + str(day['day']['avgtemp_f']) + "°F/" + str(day['day']['avgtemp_c']) + "°C"
+    except: 
+        reply = "I couldn't find your location! Maybe try using a zip code? 🙇"
         
     return reply
