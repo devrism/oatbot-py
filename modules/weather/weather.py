@@ -36,6 +36,8 @@ def convertWeatherToEmoji(condition):
         emoji = '🌊'
     elif 'thunder' in condition:
         emoji = '🌩'
+    elif 'snow' in condition: 
+        emoji = '🌨'
     elif 'rain' in condition:
         emoji = '🌧'
     elif 'fog' in condition:
