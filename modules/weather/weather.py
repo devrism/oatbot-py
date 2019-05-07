@@ -49,5 +49,5 @@ def convertWeatherToEmoji(condition):
     elif 'sunny' in condition or 'clear' in condition:
         emoji = '☀'
     else:
-        emoji = '🌧'
+        emoji = '☁️'
     return emoji
