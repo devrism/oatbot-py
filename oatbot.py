@@ -29,7 +29,7 @@ async def on_ready():
 async def on_resumed():
     # change game status
     await client.change_presence(game=discord.Game(name=playing))
-
+    
 @client.event
 async def on_message(message):
     lower_msg = message.content.lower() #we want to be able to use commands regardless of case
@@ -37,9 +37,16 @@ async def on_message(message):
     if message.author.bot is False:
 
         ############################################## slash commands ################################################
-        
+        if lower_msg.startswith('/game ') and message.channel.id == '337658289468866571': 
+            reply = startGameSession(message)
+            await client.send_message(message.channel, "hue")
+
         if lower_msg.startswith('/weather '): #weather
             reply = getWeather(message, weatherKey)
+            await client.send_message(message.channel, reply)
+
+        if lower_msg.startswith('/clap '): 
+            reply = message.content[5:].replace(" ", " 👏 ") + "👏"
             await client.send_message(message.channel, reply)
 
         #responds to oats with bandaid emoji
