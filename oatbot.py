@@ -37,8 +37,12 @@ async def on_message(message):
     if message.author.bot is False:
 
         ############################################## slash commands ################################################
-        
-        if '/weather ' in lower_msg: #weather
+        if lower_msg.startswith('/game ') and message.channel.id == '337658289468866571': 
+            nick = message.author.nick
+            role = message.author.roles
+            await client.send_message(message.channel, nick)
+
+        if lower_msg.startswith('/weather '): #weather
             reply = getWeather(message, weatherKey)
             await client.send_message(message.channel, reply)
 
