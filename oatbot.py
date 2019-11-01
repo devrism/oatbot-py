@@ -46,7 +46,7 @@ async def on_message(message):
             await client.send_message(message.channel, reply)
 
         if lower_msg.startswith('/clap '): 
-            reply = message.content[5:].replace(" ", " 👏 ") + "👏"
+            reply = message.content[5:].replace(" ", " 👏 ") + " 👏"
             await client.send_message(message.channel, reply)
 
         #responds to oats with bandaid emoji
