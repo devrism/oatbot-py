@@ -41,15 +41,14 @@ async def on_message(message):
     if message.author.bot is False:
 
         ############################################## slash commands ################################################
-        if lower_msg.startswith('/group ') and message.channel.id == '316299333714706433': 
+        if lower_msg.startswith('/group ') and message.channel.id == '575080824827805696' or message.channel.id == '284152706816540672': 
             nick = message.author.nick
             role = message.author.roles
             reply = activityManager.createGroup("testGroup", message.author.id)
             await client.send_message(message.channel, reply)
             reply = activityManager.addMemberToGroup("testGroup", "<@261157845376958464>")
             await client.send_message(message.channel, reply)
-            await client.send_message(message.channel, message.author.id)
-            reply = activityManager.deleteGroup("testGroup", message.author.id)
+            reply = activityManager.deleteGroup("testGroup", message.author)
 
         if lower_msg.startswith('/weather '): #weather
             reply = getWeather(message, weatherKey)
