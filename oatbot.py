@@ -9,12 +9,16 @@ import discord
 from res.configtest import *
 from modules.thonkify.thonkify import thonkify
 from modules.weather.weather import getWeather
+from modules.activityGroup.activityGroup import *
 
 client = discord.Client()
 
 PREFIX = 'oat' #TODO: add function to change prefix later
 separator = '/'
-playing = 'naruhodo' #name of the game the bot plays
+playing = 'with secrets, puhu' #name of the game the bot plays
+
+#Initialize ActivityManager
+activityManager = ActivityGroupManager()
 
 @client.event
 async def on_ready():
@@ -37,10 +41,15 @@ async def on_message(message):
     if message.author.bot is False:
 
         ############################################## slash commands ################################################
-        if lower_msg.startswith('/game ') and message.channel.id == '337658289468866571': 
+        if lower_msg.startswith('/group ') and message.channel.id == '316299333714706433': 
             nick = message.author.nick
             role = message.author.roles
-            await client.send_message(message.channel, nick)
+            reply = activityManager.createGroup("testGroup", message.author.id)
+            await client.send_message(message.channel, reply)
+            reply = activityManager.addMemberToGroup("testGroup", "<@261157845376958464>")
+            await client.send_message(message.channel, reply)
+            await client.send_message(message.channel, message.author.id)
+            reply = activityManager.deleteGroup("testGroup", message.author.id)
 
         if lower_msg.startswith('/weather '): #weather
             reply = getWeather(message, weatherKey)
