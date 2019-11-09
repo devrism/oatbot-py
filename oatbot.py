@@ -41,7 +41,7 @@ async def on_message(message):
     if message.author.bot is False:
 
         ############################################## slash commands ################################################
-        if lower_msg.startswith('/group ') and (message.channel.id == '575080824827805696' or message.channel.id == '284152706816540672'): 
+        if lower_msg.startswith('/group ') and (message.channel.id == '284152706816540672' or message.channel.id == '575080824827805696'): 
             reply = activityManager.parseGroupCommand(message)
             await client.send_message(message.channel, reply)
 
