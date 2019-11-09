@@ -41,23 +41,13 @@ async def on_message(message):
     if message.author.bot is False:
 
         ############################################## slash commands ################################################
-        if lower_msg.startswith('/group ') and message.channel.id == '575080824827805696' or message.channel.id == '284152706816540672': 
-            nick = message.author.nick
-            role = message.author.roles
-            reply = activityManager.createGroup("testGroup", message.author.id)
+        if lower_msg.startswith('/group ') and (message.channel.id == '575080824827805696' or message.channel.id == '284152706816540672'): 
+            reply = activityManager.parseGroupCommand(message)
             await client.send_message(message.channel, reply)
-            reply = activityManager.addMemberToGroup("testGroup", "<@261157845376958464>")
-            await client.send_message(message.channel, reply)
-            reply = activityManager.deleteGroup("testGroup", message.author)
 
-        if lower_msg.startswith('/weather '): #weather
+        elif lower_msg.startswith('/weather '): #weather
             reply = getWeather(message, weatherKey)
             await client.send_message(message.channel, reply)
-
-        #responds to oats with bandaid emoji
-        elif '/oat' in lower_msg:
-            await client.add_reaction(message, 'name:304863358325358602')
-            # await client.add_reaction(message, 'name:457245675072258078')
             
         #thonkify 
         elif '/thonkify ' in lower_msg:
@@ -69,13 +59,18 @@ async def on_message(message):
 
         ############################################## reactions #####################################################
 
+        #responds to oats with bandaid emoji
+        elif '/oat' in lower_msg:
+            await client.add_reaction(message, 'name:304863358325358602')
+            # await client.add_reaction(message, 'name:457245675072258078')
+            
         #bacAgreed
-        if 'naruhodo' in lower_msg:
+        elif 'naruhodo' in lower_msg:
             emoji = discord.utils.get(client.get_all_emojis(), id='555426896805101586')
             await client.add_reaction(message, emoji)
 
         #Dr. Pimplepopper is gross af
-        if 'pimplepopper' in lower_msg:
+        elif 'pimplepopper' in lower_msg:
             await client.add_reaction(message, '\U0001F922')
 
         #put that table back where it came from, or so help me
