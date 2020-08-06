@@ -6,7 +6,7 @@ oatbot created by devrism, exclusively for the friend chat junk land mark II Dis
 """
 
 import discord
-from res.config import *
+from res.configtest import *
 from modules.thonkify.thonkify import thonkify
 from modules.weather.weather import getWeather
 from modules.activityGroup.activityGroup import *
@@ -86,7 +86,7 @@ async def on_message(message):
             await message.add_reaction('\U0001F31A')
 
         elif 'thank' in lower_msg and 'oatbot' in lower_msg: 
-            emoji = client.get_emoji(734912847850766406)
+            emoji = client.get_emoji(674420341342470166)
             await message.add_reaction(emoji)
             
         #if the message starts with our designated prefix, process the command
