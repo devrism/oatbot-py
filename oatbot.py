@@ -15,7 +15,7 @@ client = discord.Client()
 
 PREFIX = 'oat' #TODO: add function to change prefix later
 separator = '/'
-playing = 'with secrets, puhu' #name of the game the bot plays
+playing = 'socially safe games' #name of the game the bot plays
 
 #Initialize ActivityManager
 activityManager = ActivityGroupManager()
@@ -79,6 +79,9 @@ async def on_message(message):
 
         elif 'yeet' in lower_msg:
             await client.send_message(message.channel, 'yeet!')
+
+        elif 'good morning' in lower_msg: 
+            await client.add_reaction(message, '\U0001F31E')
 
         #if the message starts with our designated prefix, process the command
         #if message.content.startswith(PREFIX+separator):
