@@ -82,6 +82,13 @@ async def on_message(message):
         elif 'good morning' in lower_msg: 
             await message.add_reaction('\U0001F31E')
 
+        elif 'good night' in lower_msg: 
+            await message.add_reaction('\U0001F31A')
+
+        elif 'thank' in lower_msg and 'oatbot' in lower_msg: 
+            emoji = client.get_emoji(734912847850766406)
+            await message.add_reaction(emoji)
+            
         #if the message starts with our designated prefix, process the command
         #if message.content.startswith(PREFIX+separator):
         #    await client.send_message(message.channel, parseCommand(message, separator, PREFIX))
