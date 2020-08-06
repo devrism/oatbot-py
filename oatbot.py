@@ -79,10 +79,10 @@ async def on_message(message):
         elif 'yeet' in lower_msg:
             await message.channel.send('yeet!')
 
-        elif 'good morning' in lower_msg: 
+        elif 'good morn' in lower_msg: 
             await message.add_reaction('\U0001F31E')
 
-        elif 'good night' in lower_msg: 
+        elif 'good night' in lower_msg or 'goodnight' in lower_msg: 
             await message.add_reaction('\U0001F31A')
 
         elif 'thank' in lower_msg and 'oatbot' in lower_msg: 
