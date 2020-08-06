@@ -9,12 +9,16 @@ import discord
 from res.config import *
 from modules.thonkify.thonkify import thonkify
 from modules.weather.weather import getWeather
+from modules.activityGroup.activityGroup import *
 
 client = discord.Client()
 
 PREFIX = 'oat' #TODO: add function to change prefix later
 separator = '/'
-playing = 'with the weather' #name of the game the bot plays
+playing = 'socially safe games' #name of the game the bot plays
+
+#Initialize ActivityManager
+activityManager = ActivityGroupManager()
 
 @client.event
 async def on_ready():
@@ -37,22 +41,13 @@ async def on_message(message):
     if message.author.bot is False:
 
         ############################################## slash commands ################################################
-        if lower_msg.startswith('/game ') and message.channel.id == '337658289468866571': 
-            reply = startGameSession(message)
-            await client.send_message(message.channel, "hue")
-
         if lower_msg.startswith('/weather '): #weather
             reply = getWeather(message, weatherKey)
-            await client.send_message(message.channel, reply)
+            await client.send_message(message.channel, "This is under construction, sorry!")
 
         if lower_msg.startswith('/clap '): 
             reply = message.content[5:].replace(" ", " 👏 ") + " 👏"
             await client.send_message(message.channel, reply)
-
-        #responds to oats with bandaid emoji
-        elif '/oat' in lower_msg:
-            await client.add_reaction(message, 'name:304863358325358602')
-            # await client.add_reaction(message, 'name:457245675072258078')
             
         #thonkify 
         elif lower_msg.startswith('/thonkify '):
@@ -64,13 +59,18 @@ async def on_message(message):
 
         ############################################## reactions #####################################################
 
+        #responds to oats with bandaid emoji
+        elif '/oat' in lower_msg:
+            await client.add_reaction(message, 'name:304863358325358602')
+            # await client.add_reaction(message, 'name:457245675072258078')
+            
         #bacAgreed
-        if 'naruhodo' in lower_msg:
+        elif 'naruhodo' in lower_msg:
             emoji = discord.utils.get(client.get_all_emojis(), id='555426896805101586')
             await client.add_reaction(message, emoji)
 
         #Dr. Pimplepopper is gross af
-        if 'pimplepopper' in lower_msg:
+        elif 'pimplepopper' in lower_msg:
             await client.add_reaction(message, '\U0001F922')
 
         #put that table back where it came from, or so help me
@@ -79,6 +79,9 @@ async def on_message(message):
 
         elif 'yeet' in lower_msg:
             await client.send_message(message.channel, 'yeet!')
+
+        elif 'good morning' in lower_msg: 
+            await client.add_reaction(message, '\U0001F31E')
 
         #if the message starts with our designated prefix, process the command
         #if message.content.startswith(PREFIX+separator):
