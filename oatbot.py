@@ -12,7 +12,7 @@ from modules.weather.weather import getWeather
 from modules.activityGroup.activityGroup import *
 
 client = discord.Client()
-playingStatus = discord.Game('socially safe games') #name of the game the bot plays
+playingStatus = discord.Game('spooky games') #name of the game the bot plays
 PREFIX = 'oat' #TODO: add function to change prefix later
 separator = '/'
 
@@ -27,7 +27,7 @@ async def on_ready():
     print(client.user.id)
     print('------')
     await client.change_presence(status=discord.Status.online, activity=playingStatus)
-
+    
 @client.event
 async def on_resumed():
     # change game status
@@ -92,5 +92,43 @@ async def on_message(message):
         #if the message starts with our designated prefix, process the command
         #if message.content.startswith(PREFIX+separator):
         #    await client.send_message(message.channel, parseCommand(message, separator, PREFIX))
+
+        #if '/initRoles' == message.content and str(message.author) == 'Dev#7089' and message.channel.id == 284152706816540672:
+            # do member role list stuff here
+        #else:
+            #await message.add_reaction('\U0000274C')
+
+# update role colors
+@client.event
+async def on_member_update(oldMember, newMember):
+    if oldMember.display_name != newMember.display_name and str(newMember.guild) == 'friend chat junkland mk. II':
+
+        # the two role Ids to be used 
+        orangeRoleId = 628605623696883712
+        yellowRoleId = 751118290285494303
+        orangeRole = newMember.guild.get_role(628605623696883712)
+        yellowRole = newMember.guild.get_role(751118290285494303)
+
+        # get a list of all members to apply roles to
+        memberList = []
+        for user in newMember.guild.members:
+            if user.bot is False: #exclude bots from our member list
+                memberList.append([str(user.display_name), user])
+        # alphabetically sort user list by nickname
+        memberList.sort()
+        
+        # apply roles to all users in list
+        for index, user in enumerate(memberList):
+            if index < 8:
+                #orange role
+                if yellowRoleId in user[1].roles:
+                    await user[1].remove_roles(yellowRole, reason="spooky name change") #remove extra role
+                await user[1].add_roles(orangeRole, reason="spooky name change")
+
+            else:
+                #yellow role
+                if orangeRoleId in user[1].roles:
+                    await user[1].remove_roles(orangeRole, reason="spooky name change")
+                await user[1].add_roles(yellowRole, reason="spooky name change")
 
 client.run(key)
