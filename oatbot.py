@@ -103,9 +103,7 @@ async def on_message(message):
 async def on_member_update(oldMember, newMember):
     if oldMember.display_name != newMember.display_name and str(newMember.guild) == 'friend chat junkland mk. II':
 
-        # the two role Ids to be used 
-        orangeRoleId = 628605623696883712
-        yellowRoleId = 751118290285494303
+        # the two roles to be used 
         orangeRole = newMember.guild.get_role(628605623696883712)
         yellowRole = newMember.guild.get_role(751118290285494303)
 
@@ -121,13 +119,13 @@ async def on_member_update(oldMember, newMember):
         for index, user in enumerate(memberList):
             if index < 8:
                 #orange role
-                if yellowRoleId in user[1].roles:
+                if yellowRole in user[1].roles:
                     await user[1].remove_roles(yellowRole, reason="spooky name change") #remove extra role
                 await user[1].add_roles(orangeRole, reason="spooky name change")
 
             else:
                 #yellow role
-                if orangeRoleId in user[1].roles:
+                if orangeRole in user[1].roles:
                     await user[1].remove_roles(orangeRole, reason="spooky name change")
                 await user[1].add_roles(yellowRole, reason="spooky name change")
 
