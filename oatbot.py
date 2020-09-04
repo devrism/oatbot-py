@@ -6,7 +6,7 @@ oatbot created by devrism, exclusively for the friend chat junk land mark II Dis
 """
 
 import discord
-from res.config import *
+from res.configtest import *
 from modules.thonkify.thonkify import thonkify
 from modules.weather.weather import getWeather
 from modules.activityGroup.activityGroup import *
