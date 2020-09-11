@@ -111,7 +111,7 @@ async def on_member_update(oldMember, newMember):
         memberList = []
         for user in newMember.guild.members:
             if user.bot is False: #exclude bots from our member list
-                memberList.append([str(user.display_name), user])
+                memberList.append([str(user.display_name).lower(), user])
         # alphabetically sort user list by nickname
         memberList.sort()
         
