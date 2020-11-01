@@ -13,7 +13,7 @@ from modules.weather.weather import getWeather
 from modules.activityGroup.activityGroup import *
 
 client = discord.Client()
-playingStatus = discord.Game('spooky games') #name of the game the bot plays
+playingStatus = discord.Game('Christmas carols') #name of the game the bot plays
 PREFIX = 'oat' #TODO: add function to change prefix later
 separator = '/'
 
