@@ -1,5 +1,6 @@
 # pylint: disable=invalid-name
 #!/usr/bin/env python3
+from datetime import datetime
 
 """
 oatbot created by devrism, exclusively for the friend chat junk land mark II Discord server
@@ -101,7 +102,9 @@ async def on_message(message):
 # update role colors
 @client.event
 async def on_member_update(oldMember, newMember):
-    if oldMember.display_name != newMember.display_name and str(newMember.guild) == 'friend chat junkland mk. II':
+    
+    # Only used for Halloween
+    if datetime.now().month == 8 and oldMember.display_name != newMember.display_name and str(newMember.guild) == 'friend chat junkland mk. II':
 
         # the two roles to be used 
         orangeRole = newMember.guild.get_role(628605623696883712)

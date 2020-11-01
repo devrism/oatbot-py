@@ -14,15 +14,15 @@ class ActivityGroupManager:
 
         if parsedMessage == '': 
             return "Want to make a new group? Use `/group new GROUPNAME` to start a new group!"
+        elif parsedMessage[1] == 'join':
+            print("adding member to group")
+            return self.addMemberToGroup(parsedMessage[2], groupLeader)
         elif parsedMessage[1] == 'new':
             print("making new group") #TODO remove ALL print statements from this method
             return self.createGroup(parsedMessage[2], groupLeader)
         elif parsedMessage[1] == 'delete':
             print("deleting group") 
             return self.deleteGroup(parsedMessage[2], groupLeader)
-        elif parsedMessage[1] == 'join':
-            print("adding member to group")
-            return self.addMemberToGroup(parsedMessage[2], groupLeader)
         elif parsedMessage[1] == 'view':
             return self.printGroupDetails(parsedMessage[2])
         else:
